@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>接着下 · 换链接续传</title>
+  <link rel="stylesheet" href="manager.css">
+  <script type="module" src="manager.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">↓</span><span>接着下<small>换链接，接着下载。</small></span></div>
+    <span class="local-badge"><i></i> 文件保存在本机</span>
+  </header>
+  <main>
+    <div class="intro"><span class="eyebrow">RESUME WITHOUT STARTING OVER</span><h1>断开了，也不用重来。</h1><p>更换隧道网址后，继续下载同一个文件。每个完整分块都会独立保存。</p></div>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+    <div class="layout">
+      <aside>
+        <section class="card new-task">
+          <h2><span class="step">01</span>新建下载</h2>
+          <label for="new-url">文件网址</label>
+          <input id="new-url" type="url" placeholder="https://…trycloudflare.com/file.tar.gz" spellcheck="false" autocomplete="off">
+          <label for="new-hash">预期 SHA-256 <span class="muted">选填，推荐提供</span></label>
+          <input id="new-hash" placeholder="发送方提供的 64 位校验值" spellcheck="false" autocomplete="off">
+          <button id="check" class="secondary full">授权并检查链接</button>
+          <div id="probe-info" class="probe-info" hidden></div>
+          <button id="create" class="primary full" disabled>选择保存目录并下载 <span aria-hidden="true">↗</span></button>
+          <p class="hint">将创建独立任务目录保存分块。请为分块和最终导出的文件预留约两倍文件大小的空间。</p>
+        </section>
+        <section class="card tasks-panel">
+          <div class="section-heading"><h2>我的下载 <span id="task-count" class="count">0</span></h2><button id="import" class="text-button">导入任务目录</button></div>
+          <div id="tasks"></div>
+        </section>
+      </aside>
+      <section class="card workspace" aria-label="下载任务详情">
+        <div id="empty" class="empty"><div class="empty-icon" aria-hidden="true">↓</div><h2>从一个链接开始</h2><p>粘贴具体文件网址，检查后选择本地保存目录。<br>链接失效时，在同一任务里替换网址即可继续。</p><div class="features"><span>断点保存</span><span>更换网址</span><span>SHA-256 校验</span></div></div>
+        <div id="details" hidden>
+          <div class="detail-heading"><div><span class="eyebrow">CURRENT DOWNLOAD</span><h2 id="file-name"></h2></div><span id="status" class="status"></span></div>
+          <div class="stats"><div><small>已保存</small><strong id="downloaded">—</strong></div><div><small>文件大小</small><strong id="total">—</strong></div><div><small>完成比例</small><strong id="percent">—</strong></div></div>
+          <progress id="progress" max="100" value="0" aria-label="已保存的下载进度"></progress>
+          <p id="task-message" class="task-message" role="status" aria-live="polite"></p>
+          <div class="source-section"><label for="task-url">当前文件网址</label><textarea id="task-url" rows="2" spellcheck="false"></textarea><p class="hint">隧道重启后，把新文件网址粘贴到这里，再点击“继续下载”。内容必须与原文件一致。</p></div>
+          <label for="task-hash">预期 SHA-256 <span class="muted">导出时验证</span></label><input id="task-hash" spellcheck="false" placeholder="可从 SHA256SUMS 文件中复制">
+          <div class="actions"><button id="resume" class="primary">继续下载</button><button id="pause" class="secondary" disabled>暂停</button><button id="export" class="secondary" disabled>导出并校验文件</button></div>
+          <div id="export-progress" class="export-progress" hidden></div>
+          <div id="hash-result" class="hash-result" hidden><small>完整文件 SHA-256</small><code id="actual-hash"></code></div>
+          <div class="task-footer"><span id="folder"></span><button id="forget" class="text-button danger">移除列表记录</button></div>
+        </div>
+      </section>
+    </div>
+    <footer><span>下载期间请保持这个标签页打开。关闭后，可重新打开扩展继续已保存的任务。</span><span>1.0.0 · Chrome / Edge</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "接着下 · 换链接续传",
+  "version": "1.0.0",
+  "description": "本地分块保存下载，断网或更换文件网址后继续，并支持 SHA-256 校验。",
+  "minimum_chrome_version": "109",
+  "action": { "default_title": "打开接着下下载管理器" },
+  "background": { "service_worker": "background.js" },
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+  }
+}
